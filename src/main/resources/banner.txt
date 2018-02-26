@@ -1,0 +1,1 @@
+ Test-NetConnection -ComputerName 172.16.43.132 -Port 1521

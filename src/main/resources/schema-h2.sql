@@ -102,3 +102,13 @@ insert into book values (33, 'Effective Java', (
 	select author.author_id
 	from author
 	where author.book_id = 33));
+
+
+
+
+create table t_employee(
+	id int generated always as identity,
+	first_name varchar(20),
+	last_name varchar(20),
+	PRIMARY KEY (ID)
+)
