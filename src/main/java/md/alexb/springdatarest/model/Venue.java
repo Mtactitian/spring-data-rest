@@ -8,27 +8,27 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
 @Table
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
-public class Organizer {
+public class Venue {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Integer id;
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Timestamp created;
+
     private String name;
 
-    @CreationTimestamp
-    @Column(name = "created", updatable = false)
-    private Timestamp timeStamp;
+    @Embedded
+    private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizer")
-    private List<Event> events = new ArrayList<>();
 }

@@ -1,15 +1,15 @@
 package md.alexb.springdatarest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -22,6 +22,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @CreationTimestamp
     @Column(updatable = false)
     private Timestamp created;
 
@@ -36,19 +37,14 @@ public class Event {
     @Column(name = "zone_id")
     private Integer zoneId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "organizer_id", referencedColumnName = "id")
     private Organizer organizer;
-//    CREATED         TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-//    NAME            varchar(256),
-//    DESCRIPTION     varchar(2048),
-//    START_TIME      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//    END_TIME        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//    ZONE_ID         int,
-//    STARTED         int,
-//    ORGANIZER_ID    int                          NOT NULL,
-//    VENUE_ID        int,
-//    PRIMARY KEY (ID),
-//    FOREIGN KEY (ORGANIZER_ID) REFERENCES ORGANIZER(ID) ON DELETE CASCADE,
-//    FOREIGN KEY (VENUE_ID) REFERENCES VENUE(ID)
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "venue_id", referencedColumnName = "id")
+    private Venue venue;
+
+    @OneToMany(mappedBy = "event", cascade = {CascadeType.PERSIST})
+    private List<Participant> participants = new ArrayList<>();
 }

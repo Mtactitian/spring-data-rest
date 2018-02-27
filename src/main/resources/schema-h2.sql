@@ -1,6 +1,6 @@
 CREATE TABLE ORGANIZER
 (
-  ID int  NOT NULL AUTO_INCREMENT,
+  ID int  generated always as identity ,
   NAME varchar(20)  NOT NULL,
   CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
@@ -9,7 +9,7 @@ CREATE TABLE ORGANIZER
 
 CREATE TABLE VENUE
 (
-  ID         int NOT NULL AUTO_INCREMENT,
+  ID         int  generated always as identity ,
   CREATED    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   NAME       varchar(256),
   STREET_ADDRESS    varchar(256),
@@ -24,7 +24,7 @@ CREATE TABLE VENUE
 
 CREATE TABLE EVENT
 (
-  ID              int	NOT NULL AUTO_INCREMENT,
+  ID              int	 generated always as identity ,
   CREATED         TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
   NAME            varchar(256),
   DESCRIPTION     varchar(2048),
@@ -32,7 +32,7 @@ CREATE TABLE EVENT
   END_TIME        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   ZONE_ID         int,
   STARTED         int,
-  ORGANIZER_ID    int                          NOT NULL,
+  ORGANIZER_ID    int,
   VENUE_ID        int,
   PRIMARY KEY (ID),
    FOREIGN KEY (ORGANIZER_ID) REFERENCES ORGANIZER(ID) ON DELETE CASCADE,
@@ -42,7 +42,7 @@ CREATE TABLE EVENT
 
 CREATE TABLE PARTICIPANT
 (
-  ID  	int        NOT NULL AUTO_INCREMENT,
+  ID  	int        generated always as identity ,
   CREATED    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   NAME      varchar(256) NOT NULL,
   EMAIL      varchar(256) NOT NULL,

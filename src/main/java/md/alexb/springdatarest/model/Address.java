@@ -15,7 +15,7 @@ public class Address {
 
     private String state;
 
-    private String county;
+    private String country;
 
     @Column(name = "postal_code")
     private String postalCode;
